@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<!--	<script async src="https://www.googletagmanager.com/gtag/js?id=G-WLX2Z5QLG8"></script>-->
+<!-- 	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'G-WLX2Z5QLG8');
+	</script>
+
+
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+
+    if (localStorage.getItem("my_app_name_here-quote-scroll") != null) {
+        $(window).scrollTop(localStorage.getItem("my_app_name_here-quote-scroll"));
+    }
+
+    $(window).on("scroll", function() {
+        localStorage.setItem("my_app_name_here-quote-scroll", $(window).scrollTop());
+    });
+
+  });
+</script> -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Spherical Dense Text-to-Image Synthesis</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+
+
+  <meta name="description" content="Project page for &#39;Spherical Dense Text-to-Image Synthesis.&#39;">
+  <link rel="icon" href="./pics/wis_logo.jpg">
+</head>
+
+<body>
+<!--   <p class="title">MultiDiffusion: Fusing Diffusion Paths for Controlled Image Generation</p>
+  <table width="999" border="0" align="center" class="menu" style="margin-bottom: 8px;">
+    <tbody>
+      <tr>
+        <td style="font-size: 17pt;" align="center"></td>
+      </tr>
+    </tbody>
+  </table> -->
+	  <table width="999" border="0" align="center" class="menu" style="margin-bottom: 8px;">
+    <tbody>
+      <tr>  <p class="title">Spherical Dense Text-to-Image Synthesis</p>
+        <td style="font-size: 17pt;" align="center"></td>
+      </tr>
+          <tr>
+        <td style="font-size: 17pt;" align="center"></td>
+      </tr>
+    </tbody>
+  </table>
+<p class="author">
+    <span class="author"><a target="_blank" href="https://github.com/Suecra">Timon Winter</a>&nbsp;<sup>2</sup></span>
+    <span class="author"><a target="_blank" href="https://stanifrolov.github.io/">Stanislav Frolov&nbsp;</a><sup>1,2</sup></span>
+	<span class="author"><a target="_blank" href="http://brian-moser.de/">Brian Bernhard Moser</a>&nbsp;<sup>1,2</sup></span>
+    <span class="author"><a target="_blank" href="https://www.dfki.uni-kl.de/~dengel/">Andreas Dengel</a>&nbsp;<sup>1,2</sup></span>
+  </p>
+  <table border="0" align="center" class="affiliations" width="1200px">
+      <tbody align="center">
+    <tr>
+        <td></td>
+        <td style="text-align: center; ">&nbsp;<sup>&nbsp;</sup>&nbsp;<sup>1&nbsp;&nbsp;</sup>RPTU Kaiserslautern-Landau, Germany &nbsp;<sup>2&nbsp;</sup>German Research Center for Artificial Intelligence, Germany &nbsp;</td>
+    </tr>
+    </tbody></table>
+
+    <table width="999" border="0" align="center" class="menu" style="margin-bottom: 8px;">
+      <tbody>
+        <tr>
+<!--          <td align="center">| <a href="paper_compressed.pdf">Paper</a> | <a href="sm/index.html">Supplementary Material</a> | <a href="https://github.com/omerbt/MultiDiffusion" target="_blank">Code</a> |</td>-->
+          <td align="center">| <a href="https://arxiv.org/abs/2502.12691">Paper</a> | <a href="https://github.com/Suecra/spherical-dense-text-to-image" target="_blank">Code</a> |</td>
+        </tr>
+      </tbody>
+    </table>
+<div class="container">
+      <table width="1000" border="0" align="center">
+        <tbody>
+			<tr>
+                <hr>
+				<td align="center"><img src="pics/masks.png" alt="" width="400" /></td>
+				<td align="center"><img src="pics/im_20241214123913_000.jpg" alt="" width="400" /></td>
+				<td align="center"><img src="pics/im_20241214123913_000_anim.gif" alt="" width="200" /></td>
+                <!-- <img src="pics/task.png" alt="" width="1000" /> -->
+            </tr>
+			<tr>
+<!--				<td style="text-align: left; width: 13%"><i>*Equal contribution.</i></td>-->
+		  </tr>
+		  <tr align="center"></tr>
+        </tbody></table>
+<!--	    &nbsp;-->
+<hr>
+  <p><span class="section"><b>Abstract</b></span> </p>
+          <p>
+              Recent advancements in text-to-image (T2I) have improved synthesis results, but challenges remain in layout control and generating omnidirectional panoramic images. Dense T2I (DT2I) and spherical T2I (ST2I) models address these issues, but so far no unified approach exists. Trivial approaches, like prompting a DT2I model to generate panoramas can not generate proper spherical distortions and seamless transitions at the borders. Our work shows that spherical dense text-to-image (SDT2I) can be achieved by integrating training-free DT2I approaches into finetuned panorama models. Specifically, we propose MultiStitchDiffusion (MSTD) and MultiPanFusion (MPF) by integrating MultiDiffusion into StitchDiffusion and PanFusion, respectively. Since no benchmark for SDT2I exists, we further construct Dense-Synthetic-View (DSynView), a new synthetic dataset containing spherical layouts to evaluate our models. Our results show that MSTD outperforms MPF across image quality as well as prompt- and layout adherence. MultiPanFusion generates more diverse images but struggles to synthesize flawless foreground objects. We propose bootstrap-coupling and turning off equirectangular perspective-projection attention in the foreground as an improvement of MPF.
+          </p>
+
+<hr>
+<p class="section"><b>MultiStitchDiffusion</b></p>
+  <div class="container">
+<table align="center" width="940" border="0">
+  <tbody>
+    <tr>
+      <td><p style="margin-top: -12px;">
+          We integrate <a href="https://github.com/littlewhitesea/StitchDiffusion">StitchDiffusion</a> with the region-based variant of <a href="https://multidiffusion.github.io/">MultiDiffusion</a>. The input includes a background text prompt and N masks with corresponding local prompts. We preprocess the masks and extend the edges cyclically to handle the stitching step. Inference is split into multiple processes, each handling one mask and prompt. After every denoising step, latents are merged as in MultiDiffusion.
+      </p></td>
+    </tr>
+    <tr>
+      <td><img src="pics/mstd.png" alt="" width="1000" /></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<p class="section" style="font-size: 120%"><b>Implementation</b></p>
+<table align="" width="940" border="0">
+  <tbody>
+    <tr>
+      <td><p>
+          StitchDiffusion can be modified to handle foreground object prompts and corresponding region masks by our <a href="https://github.com/Suecra/spherical-dense-text-to-image">provided code</a>.
+      </p></td>
+    </tr>
+  </tbody>
+ </table>
+<p class="section" style="font-size: 120%"><b>Results</b></p>
+<table align="center" width="600" border="0">
+  <tbody>
+    <tr>
+		<td align="center"><img src="pics/im_mstd_ov_1.jpg" alt="" width="400" /></td>
+		<td align="center"><img src="pics/im_20241211212301_000_anim.gif" alt="" width="200" /></td>
+    </tr>
+	<tr>
+		<td align="center"><img src="pics/im_mstd_ov_2.jpg" alt="" width="400" /></td>
+		<td align="center"><img src="pics/im_20241212111618_000_anim.gif" alt="" width="200" /></td>
+    </tr>
+	<tr>
+		<td align="center"><img src="pics/im_mstd_ov_3.jpg" alt="" width="400" /></td>
+		<td align="center"><img src="pics/im_20241214170210_000_anim.gif" alt="" width="200" /></td>
+    </tr>
+  </tbody>
+ </table>
+<hr>
+<p class="section"><b>MultiPanFusion</b></p>
+  <div class="container">
+<table align="center" width="940" border="0">
+  <tbody>
+    <tr>
+      <td><p style="margin-top: -12px;">
+          As our second method, we use <a href="https://github.com/chengzhag/PanFusion">PanFusion</a> as our base model and integrate MultiDiffusion into the inference process. To maintain alignment, masks are rotated alongside latents during each denoising step. After denoising, latents are merged as in MD. Initially, we integrate MD into the panorama branch only. To improve consistency during denoising, we extend MD to the perspective branch by projecting masks from ERP to perspective format and applying MD similarly to the panorama branch.
+      </p></td>
+    </tr>
+    <tr>
+      <td><img src="pics/mpf.png" alt="" width="1000" /></td>
+    </tr>
+  </tbody>
+</table>
+<p class="section" style="font-size: 120%"><b>Results</b></p>
+<table align="center" width="600" border="0">
+  <tbody>
+    <tr>
+		<td align="center"><img src="pics/im_mpf_ov_1.jpg" alt="" width="400" /></td>
+		<td align="center"><img src="pics/im_mpf_1_anim.gif" alt="" width="200" /></td>
+    </tr>
+	<tr>
+		<td align="center"><img src="pics/im_mpf_ov_2.jpg" alt="" width="400" /></td>
+		<td align="center"><img src="pics/im_mpf_2_anim.gif" alt="" width="200" /></td>
+    </tr>
+	<tr>
+		<td align="center"><img src="pics/im_mpf_ov_3.jpg" alt="" width="400" /></td>
+		<td align="center"><img src="pics/im_mpf_3_anim.gif" alt="" width="200" /></td>
+    </tr>
+  </tbody>
+ </table>
+<hr>
+<p class="section"><b>Dense-Synthetic-View</b></p>
+  <div class="container">
+<table align="center" width="940" border="0">
+  <tbody>
+    <tr>
+      <td><p style="margin-top: -12px;">
+          DSynView is a new synthetic dataset containing spherical layouts to evaluate our models. We combined three text-prompts used for conditioning the background with two different sets of up to three fitting foreground prompts associated with self-created masks. These masks and the code used to generate reference images can be found <a href="https://github.com/Suecra/spherical-dense-text-to-image">here</a>.
+      </p></td>
+    </tr>
+    <tr>
+      <td><img src="pics/dsynview.png" alt="" width="1000" /></td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<div>
+<!--<p class="section">&nbsp;</p>-->
+
+<p class="section">&nbsp;</p>
+<p class="section" id="paper"><b>Paper</b></p>
+          <table width="940" border="0">
+            <tbody>
+              <tr>
+                <td height="100"><a href="https://arxiv.org/abs/2302.08113" target="_blank" rel="noopener noreferrer"><img src="./pics/paper.jpg" alt="" width="140" height="167"></a></td>
+                <td width="750"><p><b>Spherical Dense Text-to-Image Synthesis
+                </b><br>
+                  Timon Winter, Stanislav Frolov, Brian Bernhard Moser, Andreas Dengel.<br />
+                  <!-- <em>ICML 2023</em><br><br> -->
+                   [<a href="https://arxiv.org/abs/2502.12691" target="_blank" rel="noopener noreferrer">paper</a>]</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+
+             <p class="section">&nbsp;</p>
+         <p class="section" id="bibtex"><b>Bibtex</b></p>
+         <table border="0">
+            <tbody>
+               <pre style=" display: block;
+                  background: #eee;
+                  white-space: pre;
+                  -webkit-overflow-scrolling: touch;
+                  max-width: 100%;
+                  min-width: 100px;
+                  border-radius: 20px;
+                  padding: 0;;">
+
+@misc{winter2025sphericaldensetexttoimagesynthesis,
+      title={Spherical Dense Text-to-Image Synthesis}, 
+      author={Timon Winter and Stanislav Frolov and Brian Bernhard Moser and Andreas Dengel},
+      year={2025},
+      eprint={2502.12691},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2502.12691}, 
+}
+			  </pre>
+            </tbody>
+         </table>
+
+<!--     <script>
+
+
+
+        let slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
+    </script> -->
+
+</body>
+</html>
