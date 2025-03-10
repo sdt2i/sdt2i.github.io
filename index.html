@@ -1,33 +1,5 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-<!--	<script async src="https://www.googletagmanager.com/gtag/js?id=G-WLX2Z5QLG8"></script>-->
-<!-- 	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'G-WLX2Z5QLG8');
-	</script>
-
-
-
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function () {
-
-    if (localStorage.getItem("my_app_name_here-quote-scroll") != null) {
-        $(window).scrollTop(localStorage.getItem("my_app_name_here-quote-scroll"));
-    }
-
-    $(window).on("scroll", function() {
-        localStorage.setItem("my_app_name_here-quote-scroll", $(window).scrollTop());
-    });
-
-  });
-</script> -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    <title>Spherical Dense Text-to-Image Synthesis</title>
   <link href="style.css" rel="stylesheet" type="text/css">
@@ -38,14 +10,6 @@ $(document).ready(function () {
 </head>
 
 <body>
-<!--   <p class="title">MultiDiffusion: Fusing Diffusion Paths for Controlled Image Generation</p>
-  <table width="999" border="0" align="center" class="menu" style="margin-bottom: 8px;">
-    <tbody>
-      <tr>
-        <td style="font-size: 17pt;" align="center"></td>
-      </tr>
-    </tbody>
-  </table> -->
 	  <table width="999" border="0" align="center" class="menu" style="margin-bottom: 8px;">
     <tbody>
       <tr>  <p class="title">Spherical Dense Text-to-Image Synthesis</p>
@@ -73,8 +37,7 @@ $(document).ready(function () {
     <table width="999" border="0" align="center" class="menu" style="margin-bottom: 8px;">
       <tbody>
         <tr>
-<!--          <td align="center">| <a href="paper_compressed.pdf">Paper</a> | <a href="sm/index.html">Supplementary Material</a> | <a href="https://github.com/omerbt/MultiDiffusion" target="_blank">Code</a> |</td>-->
-          <td align="center">| <a href="https://arxiv.org/abs/2502.12691">Paper</a> | <a href="https://github.com/Suecra/spherical-dense-text-to-image" target="_blank">Code</a> |</td>
+          <td align="center">| <a href="https://arxiv.org/abs/2502.12691">Paper</a> | <a href="https://github.com/sdt2i/spherical-dense-text-to-image" target="_blank">Code</a> |</td>
         </tr>
       </tbody>
     </table>
@@ -86,14 +49,11 @@ $(document).ready(function () {
 				<td align="center"><img src="pics/masks.png" alt="" width="400" /></td>
 				<td align="center"><img src="pics/im_20241214123913_000.jpg" alt="" width="400" /></td>
 				<td align="center"><img src="pics/im_20241214123913_000_anim.gif" alt="" width="200" /></td>
-                <!-- <img src="pics/task.png" alt="" width="1000" /> -->
             </tr>
 			<tr>
-<!--				<td style="text-align: left; width: 13%"><i>*Equal contribution.</i></td>-->
 		  </tr>
 		  <tr align="center"></tr>
         </tbody></table>
-<!--	    &nbsp;-->
 <hr>
   <p><span class="section"><b>Abstract</b></span> </p>
           <p>
@@ -121,7 +81,7 @@ $(document).ready(function () {
   <tbody>
     <tr>
       <td><p>
-          StitchDiffusion can be modified to handle foreground object prompts and corresponding region masks by our <a href="https://github.com/Suecra/spherical-dense-text-to-image">provided code</a>.
+          StitchDiffusion can be modified to handle foreground object prompts and corresponding region masks by our <a href="https://github.com/sdt2i/spherical-dense-text-to-image">provided code</a>.
       </p></td>
     </tr>
   </tbody>
@@ -182,7 +142,7 @@ $(document).ready(function () {
   <tbody>
     <tr>
       <td><p style="margin-top: -12px;">
-          DSynView is a new synthetic dataset containing spherical layouts to evaluate our models. We combined three text-prompts used for conditioning the background with two different sets of up to three fitting foreground prompts associated with self-created masks. These masks and the code used to generate reference images can be found <a href="https://github.com/Suecra/spherical-dense-text-to-image">here</a>.
+          DSynView is a new synthetic dataset containing spherical layouts to evaluate our models. We combined three text-prompts used for conditioning the background with two different sets of up to three fitting foreground prompts associated with self-created masks. These masks and the code used to generate reference images can be found <a href="https://github.com/sdt2i/spherical-dense-text-to-image">here</a>.
       </p></td>
     </tr>
     <tr>
@@ -192,7 +152,6 @@ $(document).ready(function () {
 </table>
 <hr>
 <div>
-<!--<p class="section">&nbsp;</p>-->
 
 <p class="section">&nbsp;</p>
 <p class="section" id="paper"><b>Paper</b></p>
@@ -203,7 +162,7 @@ $(document).ready(function () {
                 <td width="750"><p><b>Spherical Dense Text-to-Image Synthesis
                 </b><br>
                   Timon Winter, Stanislav Frolov, Brian Bernhard Moser, Andreas Dengel.<br />
-                  <!-- <em>ICML 2023</em><br><br> -->
+                  <!-- <em>ICIP 2025</em><br><br> -->
                    [<a href="https://arxiv.org/abs/2502.12691" target="_blank" rel="noopener noreferrer">paper</a>]</p>
                 </td>
               </tr>
@@ -236,40 +195,5 @@ $(document).ready(function () {
 			  </pre>
             </tbody>
          </table>
-
-<!--     <script>
-
-
-
-        let slideIndex = 1;
-showSlides(slideIndex);
-
-// Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-}
-    </script> -->
-
 </body>
 </html>
